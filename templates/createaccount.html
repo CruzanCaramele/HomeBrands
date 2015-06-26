@@ -8,78 +8,96 @@
 
 
 		
-		<form class="form-horizontal col-sm-6 col-sm-offset-3">
+		<form class="form-horizontal col-sm-6 col-sm-offset-3" method="POST" action="{{ url_for('createaccount') }}">
+		{{ form.hidden_tag()}}
+		 
 		<div class="panel-body">
 					
 					<div class="form-group">
-					<label for="inputEmail3" class="col-sm-4 control-label"></label>
+					<label for="title" class="col-sm-4 control-label">{{form.title.label }}</label>
 					<div class="col-sm-8">
-						<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">Mr 
-						</label>
-						<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">Ms
-						</label>
+						 
+						{% for subfield in form.title %}
+                         <label class="radio-inline">
+					       {{ subfield.label }}
+                           {{ subfield }}
+                          </label>  
+     
+                       {% endfor %}
+						 
+						 
+						 
 					</div>
 					
 					</div>
 
 
-
+                     
 					<div class="form-group">
-					<label for="inputEmail3" class="col-sm-4 control-label">Name</label>
+					<label for="fname" class="col-sm-4 control-label">{{ form.fname.label }}</label>
+					 
 					<div class="col-sm-8">
-					<input type="email" class="form-control" id="inputEmail3">
+					{% if form.fname.errors %}
+		                  {% for error in form.fname.errors %}
+							  <div class="text-danger">
+								 {{ error }}
+							 </div>
+		                 {% endfor %}
+	                   {% endif %}
+					  {{ form.fname(class_="form-control") }}
+					</div>				
+					</div>
+                     
+				    <div class="form-group">
+					<label for="lname" class="col-sm-4 control-label">{{ form.lname.label }}</label>
+					<div class="col-sm-8">
+					{% if form.lname.errors %}
+		                  {% for error in form.lname.errors %}
+							  <div class="text-danger">
+								 {{ error }}
+							 </div>
+		                 {% endfor %}
+	                   {% endif %}
+					 {{ form.lname(class_="form-control") }}
+					</div>				
+					</div>
+					
+					<div class="form-group">
+					<label for="address" class="col-sm-4 control-label">{{ form.address.label }}</label>
+					<div class="col-sm-8">
+					{% if form.address.errors %}
+		                  {% for error in form.address.errors %}
+							  <div class="text-danger">
+								 {{ error }}
+							 </div>
+		                 {% endfor %}
+	                   {% endif %}
+					 {{ form.address(class_="form-control") }}
 					</div>				
 					</div>
 
-					<div class="form-group">
-					<label for="inputEmail3" class="col-sm-4 control-label">Address</label>
-					<div class="col-sm-8">
-					<input type="email" class="form-control" id="inputEmail3">
-					</div>				
-					</div>
-
 
 					<div class="form-group">
-					<label for="inputEmail3" class="col-sm-4 control-label">State</label>
+					<label for="state" class="col-sm-4 control-label">{{ form.state.label }}</label>
 					<div class="col-sm-8">
-					<input type="email" class="form-control" id="inputEmail3">
-					</div>				
-					</div>
-
-
-
-					<div class="form-group">
-					<label for="inputEmail3" class="col-sm-4 control-label">Country</label>
-					<div class="col-sm-8">
-						<select class="form-control">
-						<option>United Kingdom</option>
-						<option>Australia</option>
-						<option>America</option>
-						<option>Russia</option>
-						<option>Nepal</option>
-						</select>
+						{% if form.state.errors %}
+		                  {% for error in form.state.errors %}
+							  <div class="text-danger">
+								 {{ error }}
+							 </div>
+		                 {% endfor %}
+	                   {% endif %}
+					    {{ form.state(class_="form-control") }}
 					</div>
 					</div>
-
-
-
-					<div class="form-group">
-					<label for="inputEmail3" class="col-sm-4 control-label">Country</label>
-					<div class="col-sm-8">
-					<input type="email" class="form-control" id="inputEmail3">
-					</div>				
-					</div>				
-
 								
 
 					<div class="form-group">
-					<label for="inputEmail3" class="col-sm-4 control-label">Date</label>
+					<label for="D.O.B" class="col-sm-4 control-label">Date Of Birth</label>
 					<div class="col-sm-8">
 					<div class="row">
 						<div class="col-xs-4">
-						<select>
+						<select id="month" name="month" value="{{request.form.month}}">
 						<option>Jan</option>
 						<option>Feb</option>
 						<option>March</option>
@@ -96,7 +114,7 @@
 						</div>
 
 						<div class="col-xs-4">
-						<select>
+						<select id="day" name="day" value="{{request.form.day}}">
 						<option>1</option>
 						<option>2</option>
 						<option>3</option>
@@ -106,7 +124,7 @@
 						</div>
 
 						<div class="col-xs-4">
-						<select>
+						<select id="year" name="year">
 						<option>2013</option>
 						<option>2014</option>
 						<option>2015</option>
@@ -121,35 +139,63 @@
 
 
 					<div class="form-group">
-					<label for="inputEmail3" class="col-sm-4 control-label">Phone</label>
+					<label for="username" class="col-sm-4 control-label">{{ form.username.label }}</label>
 					<div class="col-sm-8">
-					<input type="email" class="form-control" id="inputEmail3">
+						{% if form.username.errors %}
+		                  {% for error in form.username.errors %}
+							  <div class="text-danger">
+								 {{ error }}
+							 </div>
+		                 {% endfor %}
+	                   {% endif %}
+					 {{ form.username(class_="form-control") }}
 					</div>				
 					</div>	
 
 
 
 					<div class="form-group">
-					<label for="inputEmail3" class="col-sm-4 control-label">Email</label>
+					<label for="email" class="col-sm-4 control-label">{{ form.email.label }}</label>
 					<div class="col-sm-8">
-					<input type="email" class="form-control" id="inputEmail3">
+						{% if form.email.errors %}
+		                  {% for error in form.email.errors %}
+							  <div class="text-danger">
+								 {{ error }}
+							 </div>
+		                 {% endfor %}
+	                   {% endif %}
+					 {{ form.email(class_="form-control") }}
 					</div>				
 					</div>	
 
 
 					<div class="form-group">
-					<label for="inputEmail3" class="col-sm-4 control-label">Password</label>
+					<label for="password" class="col-sm-4 control-label">{{ form.password.label }}</label>
 					<div class="col-sm-8">
-					<input type="password" class="form-control" id="inputEmail3">
+						{% if form.password.errors %}
+		                  {% for error in form.password.errors %}
+							  <div class="text-danger">
+								 {{ error }}
+							 </div>
+		                 {% endfor %}
+	                   {% endif %}
+					 {{ form.password(class_="form-control") }}
 					</div>				
 					</div>
 
 
 
 					<div class="form-group">
-					<label for="inputEmail3" class="col-sm-4 control-label">Re-Enter Password</label>
+					<label for="password" class="col-sm-4 control-label">{{  form.password2.label}}</label>
 					<div class="col-sm-8">
-					<input type="password" class="form-control" id="inputEmail3">
+						{% if form.password2.errors %}
+		                  {% for error in form.password2.errors %}
+							  <div class="text-danger">
+								 {{ error }}
+							 </div>
+		                 {% endfor %}
+	                   {% endif %}
+					 {{ form.password2(class_="form-control") }}
 					</div>				
 					</div>	
 
@@ -157,6 +203,7 @@
 
 
 			</div>
+	 
 	</form>
 	</div>
 	</div>
@@ -164,3 +211,4 @@
 
 	</div>
 {% endblock %}
+
