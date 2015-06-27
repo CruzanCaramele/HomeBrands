@@ -2,10 +2,9 @@ from flask import Flask,render_template,request,redirect,url_for,flash
 from sqlalchemy.orm import sessionmaker
 from models.models import Base,User,Product,ProductItem,DATABASE, initialize
 from sqlalchemy import exists
-from flask_wtf import Form
 from forms import RegisterForm
 from flask.ext.bcrypt import check_password_hash
-from flask.ext.login import LoginManager,login_user
+from flask.ext.login import LoginManager,login_user, logout_user,login_required
 
 DEBUG  = True
 PORT = 8080
@@ -92,6 +91,12 @@ def login():
         return render_template('login.html', form=form)
     return authenticate(form = form)
     
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("You 've been logged out!", "success")
+    return redirect(url_for('index'))
 
 @app.before_request
 def before_request():
@@ -126,7 +131,7 @@ if __name__ == '__main__':
             title='MR',
             fname = 'Musa',
             lname = 'Salihu',
-            username = 'Musa',
+            username = 'musa',
             email = 'musa.3@hotmail.com',
             password = 'password',
             address = 'Block 46A-3-4 Siri Ixora Jalan Pjs Seksen 29/11 Shah Alam Malaysia',
@@ -144,7 +149,7 @@ if __name__ == '__main__':
     def load_user(userid):
         try:
             return User.query(User).filter(User.id == userid).first()
-        except :
+        except  :
             return None
 
     app.run(debug = DEBUG, host=HOST, port= PORT)

@@ -43,7 +43,7 @@ class User(UserMixin , Base):
     is_Logged = Column(Boolean, default = False)
     is_Active = Column (Boolean , default = False)
     is_Block = Column(Boolean, default = False)
-    joined_On = Column(ArrowType,default = arrow.utcnow())
+    joined_On = Column(ArrowType, default=arrow.utcnow())
     
 
     @classmethod
