@@ -137,15 +137,18 @@ if __name__ == '__main__':
         pass
         
     app.secret_key = 'Innalhamdulillah.nahmaduhu.taalanastainubihi.wanastagfiruh!'
-    app.run(debug = DEBUG, host=HOST, port= PORT)
-
     login_manager = LoginManager()
     login_manager.init_app(app)
     login_manager.login_view = 'login'
-
     @login_manager.user_loader
     def load_user(userid):
         try:
-            return session.query(User).filter(User.id == userid).first()
-        except models.DoesNotExist :
+            return User.query(User).filter(User.id == userid).first()
+        except :
             return None
+
+    app.run(debug = DEBUG, host=HOST, port= PORT)
+
+    
+
+   
