@@ -56,7 +56,8 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="collections">Men</a></li>
             <li><a href="collections">Women</a></li>
-            <li><a href="collections">Gifts</a></li>            
+            <li><a href="collections">Gifts</a></li>   
+             		
           </ul>
         </li>
         <li><a href="lookbook">Look book</a></li>
@@ -70,7 +71,21 @@
         <button type="submit" class="btn btn-inverse">search</button>
       </form>
       <ul class="nav navbar-nav">
-        <li><a href="#"  data-toggle="modal" data-target="#login"><span class="glyphicon glyphicon-user"></span> Login / Register</a></li>
+	    {% if g.user.is_authenticated()%}
+		
+		  <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome {{g.user.fname}}  {{g.user.lname}} <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+            <li><a href="collections">Edit Account</a></li>   
+             		
+          </ul>
+        </li> 
+               
+       {% endif %}	
+	    {% if g.user.is_authenticated() == False %}
+         <li><a href="#"  data-toggle="modal" data-target="#login"><span class="glyphicon glyphicon-user"></span> Login / Register</a></li>
+		{% endif %}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="cart-counter">8</span> <span class="caret"></span></a>
           <div class="dropdown-menu mini-cart">
