@@ -44,7 +44,7 @@
 							 </div>
 		                 {% endfor %}
 	                   {% endif %}
-					  {{ form.fname(class_="form-control") }}
+					  {{ form.fname(class_="form-control",placeholder=form.fname.label.text) }}
 					</div>				
 					</div>
                      
@@ -58,7 +58,7 @@
 							 </div>
 		                 {% endfor %}
 	                   {% endif %}
-					 {{ form.lname(class_="form-control") }}
+					 {{ form.lname(class_="form-control",placeholder=form.lname.label.text) }}
 					</div>				
 					</div>
 					
@@ -72,7 +72,7 @@
 							 </div>
 		                 {% endfor %}
 	                   {% endif %}
-					 {{ form.address(class_="form-control") }}
+					 {{ form.address(class_="form-control",placeholder=form.address.label.text) }}
 					</div>				
 					</div>
 
@@ -90,54 +90,7 @@
 					    {{ form.state(class_="form-control") }}
 					</div>
 					</div>
-								
-
-					<div class="form-group">
-					<label for="D.O.B" class="col-sm-4 control-label">Date Of Birth</label>
-					<div class="col-sm-8">
-					<div class="row">
-						<div class="col-xs-4">
-						<select id="month" name="month" value="{{request.form.month}}">
-						<option>Jan</option>
-						<option>Feb</option>
-						<option>March</option>
-						<option>April</option>
-						<option>May</option>
-						<option>June</option>
-						<option>July</option>
-						<option>August</option>
-						<option>September</option>
-						<option>Octobe</option>
-						<option>November</option>
-						<option>December</option>
-						</select>
-						</div>
-
-						<div class="col-xs-4">
-						<select id="day" name="day" value="{{request.form.day}}">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						</select>
-						</div>
-
-						<div class="col-xs-4">
-						<select id="year" name="year">
-						<option>2013</option>
-						<option>2014</option>
-						<option>2015</option>
-						<option>2016</option>
-						<option>2017</option>
-						</select>
-						</div>
-					</div>
-					</div>
-					</div>	
-
-
-
+	
 					<div class="form-group">
 					<label for="username" class="col-sm-4 control-label">{{ form.username.label }}</label>
 					<div class="col-sm-8">
@@ -148,7 +101,7 @@
 							 </div>
 		                 {% endfor %}
 	                   {% endif %}
-					 {{ form.username(class_="form-control") }}
+					 {{ form.username(class_="form-control",placeholder=form.username.label.text) }}
 					</div>				
 					</div>	
 
@@ -164,7 +117,7 @@
 							 </div>
 		                 {% endfor %}
 	                   {% endif %}
-					 {{ form.email(class_="form-control") }}
+					 {{ form.email(class_="form-control",placeholder= form.email.label.text) }}
 					</div>				
 					</div>	
 
@@ -179,7 +132,7 @@
 							 </div>
 		                 {% endfor %}
 	                   {% endif %}
-					 {{ form.password(class_="form-control") }}
+					 {{ form.password(class_="form-control", placeholder=form.password.label.text ) }}
 					</div>				
 					</div>
 
@@ -195,7 +148,7 @@
 							 </div>
 		                 {% endfor %}
 	                   {% endif %}
-					 {{ form.password2(class_="form-control") }}
+					 {{ form.password2(class_="form-control",placeholder = form.password2.label.text) }}
 					</div>				
 					</div>	
 
