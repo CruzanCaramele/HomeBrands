@@ -10,7 +10,7 @@ from flask.ext.login import LoginManager,login_user
 DEBUG  = True
 PORT = 8080
 HOST = '0.0.0.0'
-re_createTable = False
+re_createTable = True
  
 
 

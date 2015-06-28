@@ -19,7 +19,7 @@ from sqlalchemy.exc import IntegrityError
 
 Base = declarative_base()
 
-engine = create_engine('postgresql://postgres:0102443167@localhost:5432/postgres',echo=True)
+engine = create_engine('postgresql://postgres:bury148few951@localhost:5432/postgres',echo=True)
 Base.metadata.bind = (engine)
 
 DBSession = sessionmaker(bind=engine)
