@@ -106,7 +106,7 @@ class ProductItem(Base):
     product_id = Column(Integer, ForeignKey('products.id'))
     product = relationship(Product)
     
-
+#initialize the module. Its called from app.py to initialize process
 def initialize(re_createTable= False):
     #connection = DATABASE.connect()
     
