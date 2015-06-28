@@ -58,6 +58,7 @@
             <li><a href="collections">Women</a></li>       
       
         </li>
+        </ul>
       </ul>
 <!------------------      remove checkout and look book
         <li><a href="lookbook">Look book</a></li>
@@ -71,28 +72,8 @@
         <button type="submit" class="btn btn-inverse">search</button>
       </form>
       <ul class="nav navbar-nav">
-        <li><a href="#"  data-toggle="modal" data-target="#login"><span class="glyphicon glyphicon-user"></span> Login / Register</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="cart-counter">8</span> <span class="caret"></span></a>
-          <div class="dropdown-menu mini-cart">
-          <div class="row product-list">
-            <div class="col-xs-3"><a href="#"><img src="../static/images/products/1.jpg" class="img-responsive" alt="product"></a></div>
-            <div class="col-xs-7"><a href="#">White V-neck Tshirt</a></div>
-            <div class="col-xs-1"><a href="#"><i class="fa fa-close"></i></a></div>
-          </div>
+        
 
-          <div class="row product-list">
-            <div class="col-xs-3"><a href="#"><img src="../static/images/products/2.jpg" class="img-responsive" alt="product"></a></div>
-            <div class="col-xs-7"><a href="#">White V-neck Tshirt</a></div>
-            <div class="col-xs-1"><a href="#"><i class="fa fa-close"></i></a></div>
-          </div>
-
-          <div class="clearfix">
-          <a href="checkout" class="btn btn-primary pull-left">conitune shopping</a> <a href="/checkout" class="btn btn-danger pull-right">checkout</a>
-          </div>
-
-          </div>
-        </li>
 	    {% if g.user.is_authenticated()%}
 		
 		  <li class="dropdown">
@@ -108,27 +89,7 @@
 	    {% if g.user.is_authenticated() == False %}
          <li><a href="#"  data-toggle="modal" data-target="#login"><span class="glyphicon glyphicon-user"></span> Login / Register</a></li>
 		{% endif %}
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="cart-counter">8</span> <span class="caret"></span></a>
-          <div class="dropdown-menu mini-cart">
-          <div class="row product-list">
-            <div class="col-xs-3"><a href="#"><img src="../static/images/products/1.jpg" class="img-responsive" alt="product"></a></div>
-            <div class="col-xs-7"><a href="#">White V-neck Tshirt</a></div>
-            <div class="col-xs-1"><a href="#"><i class="fa fa-close"></i></a></div>
-          </div>
 
-          <div class="row product-list">
-            <div class="col-xs-3"><a href="#"><img src="../static/images/products/2.jpg" class="img-responsive" alt="product"></a></div>
-            <div class="col-xs-7"><a href="#">White V-neck Tshirt</a></div>
-            <div class="col-xs-1"><a href="#"><i class="fa fa-close"></i></a></div>
-          </div>
-
-          <div class="clearfix">
-          <a href="checkout" class="btn btn-primary pull-left">conitune shopping</a> <a href="/checkout" class="btn btn-danger pull-right">checkout</a>
-          </div>
-
-          </div>
-        </li>
       </ul>
     </div><!-- Wnavbar-collapse -->
   </div><!-- container-fluid -->
