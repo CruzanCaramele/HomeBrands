@@ -1,11 +1,10 @@
-from flask import Flask,render_template,request,redirect,url_for,flash
+from flask import Flask,render_template,request,redirect,url_for,flash,g
 from sqlalchemy.orm import sessionmaker
 from models.models import Base,User,Product,ProductItem,DATABASE, initialize
 from sqlalchemy import exists
-from flask_wtf import Form
 from forms import RegisterForm
 from flask.ext.bcrypt import check_password_hash
-from flask.ext.login import LoginManager,login_user
+from flask.ext.login import LoginManager,login_user, logout_user,login_required,current_user 
 
 DEBUG  = True
 PORT = 8080
@@ -21,6 +20,15 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 app = Flask(__name__)
+
+app.secret_key = 'Innalhamdulillah.nahmaduhu.taalanastainubihi.wanastagfiruh!'
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(userid):
+    return session.query(User).get(int(userid))
 
     
 @app.route('/',methods=['GET', 'POST'])
@@ -88,14 +96,25 @@ def terms():
 @app.route('/login', methods = ['GET','POST'])
 def login():
     form = RegisterForm.LoginForm()
-    if request.method == 'GET':
-        return render_template('login.html', form=form)
+    if request.method == 'GET' :
+        if g.user.is_authenticated() == False:
+            return render_template('login.html', form=form)
+        if g.user.is_authenticated():
+            return redirect(url_for('index'))
+            
     return authenticate(form = form)
     
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("You 've been logged out!", "success")
+    return redirect(url_for('index'))
 
 @app.before_request
 def before_request():
-     """Connect to the database connection before each request. """
+    g.user = current_user
+    #"""Connect to the database connection before each request. """
 
 @app.after_request
 def after_request(response):
@@ -126,7 +145,7 @@ if __name__ == '__main__':
             title='MR',
             fname = 'Musa',
             lname = 'Salihu',
-            username = 'Musa',
+            username = 'musa',
             email = 'musa.3@hotmail.com',
             password = 'password',
             address = 'Block 46A-3-4 Siri Ixora Jalan Pjs Seksen 29/11 Shah Alam Malaysia',
@@ -136,16 +155,8 @@ if __name__ == '__main__':
     except:
         pass
         
-    app.secret_key = 'Innalhamdulillah.nahmaduhu.taalanastainubihi.wanastagfiruh!'
     app.run(debug = DEBUG, host=HOST, port= PORT)
 
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-    login_manager.login_view = 'login'
+    
 
-    @login_manager.user_loader
-    def load_user(userid):
-        try:
-            return session.query(User).filter(User.id == userid).first()
-        except models.DoesNotExist :
-            return None
+   

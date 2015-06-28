@@ -33,6 +33,7 @@ class User(UserMixin , Base):
     title = Column(CHAR(3), nullable = False)
     fname = Column(String(100), nullable = False)
     lname = Column(String(100), nullable = False)
+    DateOfBirth = Column(ArrowType, default = arrow.utcnow())
     username = Column(String(100), nullable = False, unique = True)
     email = Column (String(50), nullable =False, unique = True)
     password = Column(String(100), nullable = False)
@@ -42,7 +43,7 @@ class User(UserMixin , Base):
     is_Logged = Column(Boolean, default = False)
     is_Active = Column (Boolean , default = False)
     is_Block = Column(Boolean, default = False)
-    joined_On = Column(ArrowType)
+    joined_On = Column(ArrowType, default=arrow.utcnow())
     
 
     @classmethod
@@ -58,8 +59,7 @@ class User(UserMixin , Base):
                 password = generate_password_hash(password),
                 address = address,
                 state = state,
-                is_Admin = is_Admin,
-                joined_On = arrow.utcnow())
+                is_Admin = is_Admin)
             
           
             session.add(myFirstUser)

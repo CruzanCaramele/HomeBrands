@@ -15,7 +15,7 @@
 							 </div>
 		                 {% endfor %}
 	                   {% endif %}
-					  {{ form.email(class_="form-control") }}
+					  {{ form.email(placeholder=form.email.label.text, class_="form-control") }}
                 
                 </div>
                 <div class="form-group">
@@ -27,7 +27,7 @@
 							 </div>
 		                 {% endfor %}
 	                   {% endif %}
-					  {{ form.password(class_="form-control") }}
+					  {{ form.password(placeholder=form.password.label.text, class_="form-control") }}
                 
                 </div>
                 <div class="checkbox">
