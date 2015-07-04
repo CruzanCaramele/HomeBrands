@@ -30,8 +30,27 @@ def authenticate(form):
                 return redirect(url_for('index'))
             else :
                 flash("Your email or password does not match !", "error")
-                return render_template('login.html',form = form)
-    return render_template('login.html',form = form)       
+                return render_template('login.html',formLogin = form)
+    return render_template('login.html',formLogin = form)       
+
+#authenticate pop up login
+def authenticatePopUpLogin(formLogin,route):
+    if formLogin.validate_on_submit():
+        try:
+            user = session.query(User).filter(User.email == formLogin.email.data).first()
+        except :# models.DoesNotExist:
+            flash("Your email or password does not match !", "error")
+            return render_template('login.html',form=formLogin,formLogin = formLogin)
+        else :
+            if check_password_hash(user.password,formLogin.password.data):
+                login_user(user, remember = formLogin.remember.data)
+                flash("You've been logged in", "success")
+                return redirect(url_for(route))
+            else :
+                flash("Your email or password does not match !", "error")
+                return render_template('login.html',form=formLogin,formLogin = formLogin)
+                
+    return render_template('login.html',form=formLogin,formLogin = formLogin)
 
 #Create Account
 def createuser(form):
