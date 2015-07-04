@@ -51,74 +51,113 @@ def load_user(userid):
 def index():
     formLogin = AccountForm.LoginForm()
     if request.method == 'GET' :
-        return render_template('index.html',form=formLogin)
+        return render_template('index.html',formLogin=formLogin)
     if request.method == 'POST' :
         if request.form.get('login', None)  == 'Login' :
-            if formLogin.validate_on_submit():
-                try:
-                    user = session.query(User).filter(User.email == formLogin.email.data).first()
-                    return user.lname
-                except :# models.DoesNotExist:
-                    flash("Your email or password does not match !", "error")
-                else :
-                    if check_password_hash(user.password,formLogin.password.data):
-                        login_user(user, remember = formLogin.remember.data)
-                        flash("You've been logged in", "success")
-                        return redirect(url_for('index'))
-                    else :
-                        flash("Your email or password does not match !", "error")
-                        return render_template('login.html',form = formLogin)
-                
-        return render_template('index.html',form=formLogin)
-    return render_template('index.html',form=formLogin)
+            return AccountController.authenticatePopUpLogin(formLogin,'index')
+            
 
 
-@app.route('/about')
+@app.route('/about',methods=['GET', 'POST'])
 def about():
-    return render_template('about.html')
+    """ To address user pop up login , we have to pass formLogin to each page """
+    formLogin = AccountForm.LoginForm()
+    if request.method == 'GET' :
+        return render_template('about.html',formLogin=formLogin)
+    if request.method == 'POST' :
+        if request.form.get('login', None)  == 'Login' :
+            return AccountController.authenticatePopUpLogin(formLogin,'about')
 
-@app.route('/checkout')
+@app.route('/checkout',methods=['GET', 'POST'])
 def checkout():
-    return render_template('checkout.html')
+    """ To address user pop up login , we have to pass formLogin to each page """
+    formLogin = AccountForm.LoginForm()
+    if request.method == 'GET' :
+        return render_template('checkout.html',formLogin=formLogin)
+    if request.method == 'POST' :
+        if request.form.get('login', None)  == 'Login' :
+            return AccountController.authenticatePopUpLogin(formLogin,'checkout')
+    
 
-@app.route('/collections')
+@app.route('/collections',methods = ['GET','POST'])
 def collections():
-    return render_template('collections.html')
+    """ To address user pop up login , we have to pass formLogin to each page """
+    formLogin = AccountForm.LoginForm()
+    if request.method == 'GET' :
+        return render_template('collections.html',formLogin=formLogin)
+    
+    if request.method == 'POST' :
+        if request.form.get('login', None)  == 'Login' :
+            return AccountController.authenticatePopUpLogin(formLogin,'collections')
+            
 
 
-@app.route('/contact')
+@app.route('/contact',methods = ['GET','POST'])
 def contact():
-    return render_template('contact.html')
+    """ To address user pop up login , we have to pass formLogin to each page """
+    formLogin = AccountForm.LoginForm()
+    if request.method == 'GET' :
+        return render_template('contact.html',formLogin=formLogin)
+    
+    if request.method == 'POST' :
+        if request.form.get('login', None)  == 'Login' :
+            return AccountController.authenticatePopUpLogin(formLogin,'contact')
+            
 
 #Create Account view. The first if, If the request type is GET , return our form Else Post a form.
 @app.route('/createaccount', methods = ['GET','POST'])
 def createaccount():
     form = AccountForm.RegisterForm()
+    formLogin = AccountForm.LoginForm()
     if request.method =='GET':
-        return render_template('createaccount.html',form=form)
+        return render_template('createaccount.html',form=form,formLogin=formLogin)
     if request.method =='POST':
         return AccountController.createuser(form=form)
 
-@app.route('/lookbook')
+@app.route('/lookbook',methods = ['GET','POST'])
 def lookbook():
-    return render_template('lookbook.html')
+    """ To address user pop up login , we have to pass formLogin to each page """
+    formLogin = AccountForm.LoginForm()
+    if request.method == 'GET' :
+        return render_template('lookbook.html',formLogin=formLogin)
+    
+    if request.method == 'POST' :
+        if request.form.get('login', None)  == 'Login' :
+            return AccountController.authenticatePopUpLogin(formLogin,'lookbook')
 
 
 
-@app.route('/product')
+@app.route('/product',methods=['GET', 'POST'])
 def product():
-    return render_template('product.html')
+    """ To address user pop up login , we have to pass formLogin to each page """
+    formLogin = AccountForm.LoginForm()
+    if request.method == 'GET' :
+        return render_template('product.html',formLogin=formLogin)
+    
+    if request.method == 'POST' :
+        if request.form.get('login', None)  == 'Login' :
+            return AccountController.authenticatePopUpLogin(formLogin,'product')
 
-@app.route('/terms')
+
+@app.route('/terms',methods=['GET', 'POST'])
 def terms():
-    return render_template('terms.html')
+    """ To address user pop up login , we have to pass formLogin to each page """
+    formLogin = AccountForm.LoginForm()
+    if request.method == 'GET' :
+        return render_template('terms.html',formLogin=formLogin)
+    
+    if request.method == 'POST' :
+        if request.form.get('login', None)  == 'Login' :
+            return AccountController.authenticatePopUpLogin(formLogin,'terms')
+
 
 @app.route('/login', methods = ['GET','POST'])
 def login():
     form = AccountForm.LoginForm()
     if request.method == 'GET' :
+        # Check if user is already logged in, return login page if not, otherwise index
         if g.user.is_authenticated() == False:
-            return render_template('login.html', form=form)
+            return render_template('login.html', form=form,formLogin=form)
         if g.user.is_authenticated():
             return redirect(url_for('index'))
             
