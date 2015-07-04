@@ -5,7 +5,7 @@ from datetime import datetime
 from flask.ext.login import UserMixin
 from flask.ext.bcrypt import generate_password_hash
 from sqlalchemy_utils import ArrowType
-import arrow
+import arrow,string
 from sqlalchemy import types
 from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, Binary, CHAR
 from sqlalchemy.ext.declarative import declarative_base
