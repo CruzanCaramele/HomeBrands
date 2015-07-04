@@ -130,13 +130,15 @@ def logout():
     logout_user()
     flash("You 've been logged out!", "success")
     return redirect(url_for('index'))
+    
 
 #The method before is called before each request(i.e GET,POST).
 #It you want something to be executed before each request then add it below
 @app.before_request
 def before_request():
+    """Connect to the database connection before each request. """
     g.user = current_user
-    #"""Connect to the database connection before each request. """
+    
 
 #The method after is called after each request
 @app.after_request
