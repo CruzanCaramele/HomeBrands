@@ -39,8 +39,8 @@ def authenticatePopUpLogin(formLogin,route):
         try:
             user = session.query(User).filter(User.email == formLogin.email.data).first()
         except :# models.DoesNotExist:
-            flash("Your email or password does not match !", "error")
             return render_template('login.html',form=formLogin,formLogin = formLogin)
+            flash("Your email or password does not match !", "error")
         else :
             if check_password_hash(user.password,formLogin.password.data):
                 login_user(user, remember = formLogin.remember.data)
