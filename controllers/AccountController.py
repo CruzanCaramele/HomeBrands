@@ -26,8 +26,8 @@ def authenticate(form):
         else :
             if check_password_hash(user.password,form.password.data):
                 login_user(user, remember = form.remember.data)
-                flash("You've been logged in", "success")
                 return redirect(url_for('index'))
+                flash("You've been logged in", "success")
             else :
                 flash("Your email or password does not match !", "error")
                 return render_template('login.html',formLogin = form)
