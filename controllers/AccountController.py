@@ -47,8 +47,8 @@ def authenticatePopUpLogin(formLogin,route):
                 return redirect(url_for(route))
                 flash("You've been logged in", "success")
             else :
-                flash("Your email or password does not match !", "error")
                 return render_template('login.html',form=formLogin,formLogin = formLogin)
+                flash("Your email or password does not match !", "error")
                 
     return render_template('login.html',form=formLogin,formLogin = formLogin)
 
