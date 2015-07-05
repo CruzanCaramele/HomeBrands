@@ -58,6 +58,17 @@ def index():
             
 
 
+@app.route('/accountsuccess',methods=['GET', 'POST'])
+def accountsuccess():
+    """ To address user pop up login , we have to pass formLogin to each page """
+    formLogin = AccountForm.LoginForm()
+    if request.method == 'GET' :
+        return render_template('accountsuccess.html',formLogin=formLogin)
+    if request.method == 'POST' :
+        if request.form.get('login', None)  == 'Login' :
+            return AccountController.authenticatePopUpLogin(formLogin,'index')
+
+
 @app.route('/about',methods=['GET', 'POST'])
 def about():
     """ To address user pop up login , we have to pass formLogin to each page """
@@ -67,6 +78,7 @@ def about():
     if request.method == 'POST' :
         if request.form.get('login', None)  == 'Login' :
             return AccountController.authenticatePopUpLogin(formLogin,'about')
+        
 
 @app.route('/checkout',methods=['GET', 'POST'])
 def checkout():
@@ -112,6 +124,8 @@ def createaccount():
     if request.method =='GET':
         return render_template('createaccount.html',form=form,formLogin=formLogin)
     if request.method =='POST':
+        if request.form.get('login', None)  == 'Login' :
+            return AccountController.authenticatePopUpLogin(formLogin,'index')
         return AccountController.createuser(form=form, formLogin=formLogin)
 
 @app.route('/lookbook',methods = ['GET','POST'])
