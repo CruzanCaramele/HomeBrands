@@ -67,6 +67,22 @@
       
       <form class="navbar-form navbar-left searchbar" role="search">
         <div class="form-group">
+               {% with messages = get_flashed_messages(with_categories=True) %}
+
+                    {% if messages %}
+                      <ul>
+                          {% for message in messages %}
+                            <li>
+                              <strong>{{message}}</strong>
+                            </li>
+
+                          {% endfor %}
+                      </ul>
+
+
+                    {% endif %} 
+
+                {% endwith %} 
           <input type="text" class="form-control" placeholder="Search for products">
         </div>
         <button type="submit" class="btn btn-inverse">search</button>
@@ -74,21 +90,22 @@
       <ul class="nav navbar-nav">
         
 
-	    {% if g.user.is_authenticated()%}
+	{% if g.user.is_authenticated()%}
 		
-		  <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome {{g.user.fname}}  {{g.user.lname}} <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-            <li><a href="collections">Edit Account</a></li>   
-             		
-          </ul>
-        </li> 
+    		  <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome {{g.user.fname}}  {{g.user.lname}} <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                <li><a href="collections">Edit Account</a></li>   
+                 		
+              </ul>
+            </li> 
                
-       {% endif %}	
-	    {% if g.user.is_authenticated() == False %}
+     {% endif %}	
+
+	{% if g.user.is_authenticated() == False %}
          <li><a href="#"  data-toggle="modal" data-target="#login"><span class="glyphicon glyphicon-user"></span> Login / Register</a></li>
-		{% endif %}
+	{% endif %}
 
       </ul>
     </div><!-- Wnavbar-collapse -->
@@ -182,26 +199,29 @@
                 <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
 				{% if formLogin.password.errors %}
-		                  {% for error in formLogin.password.errors %}
+		                {% for error in formLogin.password.errors %}
 							  <div class="text-danger">
 								 {{ error }}
 							 </div>
-		                 {% endfor %}
-	                   {% endif %}
-					  {{ formLogin.password(placeholder=formLogin.password.label.text, class_="form-control") }}
+		                {% endfor %}
+	               {% endif %}
+
+					{{ formLogin.password(placeholder=formLogin.password.label.text, class_="form-control") }}
                 
                 </div>
                 <div class="checkbox">
                 <label>
                 {% if formLogin.remember.errors %}
-		                  {% for error in formLogin.remember.errors %}
-							  <div class="text-danger">
-								 {{ error }}
-							 </div>
-		                 {% endfor %}
-	                   {% endif %}
+		          {% for error in formLogin.remember.errors %}
+					<div class="text-danger">
+							{{ error }}
+					</div>
+		          {% endfor %}
+	          {% endif %}
+
 					  {{ formLogin.remember(class_="form-control") }}
 					  {{ formLogin.remember.label.text}}
+            
                 </label>
                 </div>
                 <div class="forgot-password"><a href="#">Forgot Password</a></div>
