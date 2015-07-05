@@ -5,41 +5,58 @@
    <div class="panel-body">
             <form class="col-sm-6" method="POST" action="{{ url_for('login') }}">
 			{{ formLogin.hidden_tag()}}
+		{% with messages = get_flashed_messages(with_categories=True) %}
+
+		{% if messages %}
+			<ul>
+				{% for message in messages %}
+					<li>
+						<strong>{{message}}</strong>
+					</li>
+
+				{% endfor %}
+			</ul>
+
+
+		{% endif %}	
+
+		{% endwith %} 
+		
                 <h4>Sign In</h4>
                 <div class="form-group">
                 
-				       {% if formLogin.email.errors %}
-		                  {% for error in formLogin.email.errors %}
-							  <div class="text-danger">
-								 {{ error }}
-							 </div>
-		                 {% endfor %}
-	                   {% endif %}
+			{% if formLogin.email.errors %}
+		                    {% for error in formLogin.email.errors %}
+					<div class="text-danger">
+						{{ error }}
+					</div>
+		                    {% endfor %}
+	                     {% endif %}
 					  {{ formLogin.email(placeholder=formLogin.email.label.text, class_="form-control") }}
                 
                 </div>
                 <div class="form-group">
                 
-				  {% if formLogin.password.errors %}
-		                  {% for error in formLogin.password.errors %}
-							  <div class="text-danger">
-								 {{ error }}
-							 </div>
-		                 {% endfor %}
-	                   {% endif %}
+		{% if formLogin.password.errors %}
+		          {% for error in formLogin.password.errors %}
+				<div class="text-danger">
+					{{ error }}
+				</div>
+		          {% endfor %}
+	          {% endif %}
 					  {{ formLogin.password(placeholder=formLogin.password.label.text, class_="form-control") }}
                 
                 </div>
                 <div class="checkbox">
                 <label>
                  
-				 {% if formLogin.remember.errors %}
-		                  {% for error in formLogin.remember.errors %}
-							  <div class="text-danger">
-								 {{ error }}
-							 </div>
-		                 {% endfor %}
-	                   {% endif %}
+		{% if formLogin.remember.errors %}
+		          {% for error in formLogin.remember.errors %}
+				<div class="text-danger">
+					{{ error }}
+				</div>
+		          {% endfor %}
+	          {% endif %}
 					  {{ formLogin.remember(class_="form-control") }}
 					  {{ formLogin.remember.label.text}}
                 </label>
