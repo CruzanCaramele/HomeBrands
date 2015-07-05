@@ -167,8 +167,9 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash("You 've been logged out!", "success")
     return redirect(url_for('index'))
+    flash("You 've been logged out!", "success")
+    
     
 
 #The method before is called before each request(i.e GET,POST).
