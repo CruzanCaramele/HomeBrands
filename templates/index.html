@@ -1,22 +1,6 @@
 {% extends 'template.html' %}
 {% block content %}
 
-		{% with messages = get_flashed_messages(with_categories=True) %}
-
-		{% if messages %}
-			<ul>
-				{% for message in messages %}
-					<li>
-						<strong>{{message}}</strong>
-					</li>
-
-				{% endfor %}
-			</ul>
-
-
-		{% endif %}	
-
-		{% endwith %} 
 
 	<div class="content fullpage homepage">
 

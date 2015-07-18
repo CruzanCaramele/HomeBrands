@@ -67,22 +67,7 @@
       
       <form class="navbar-form navbar-left searchbar" role="search">
         <div class="form-group">
-               {% with messages = get_flashed_messages(with_categories=True) %}
-
-                    {% if messages %}
-                      <ul>
-                          {% for message in messages %}
-                            <li>
-                              <strong>{{message}}</strong>
-                            </li>
-
-                          {% endfor %}
-                      </ul>
-
-
-                    {% endif %} 
-
-                {% endwith %} 
+ 
           <input type="text" class="form-control" placeholder="Search for products">
         </div>
         <button type="submit" class="btn btn-inverse">search</button>
@@ -109,12 +94,28 @@
 
       </ul>
     </div><!-- Wnavbar-collapse -->
-  </div><!-- container-fluid -->
+  </div><!-- container-fluid -->   
+
+<div>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for message in messages %}
+      <button class="btn btn-default btn-xs close flash_messages" data-dismiss="alert" aria-label="Close">
+          {{message}}
+     </button>
+      
+    {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
 </nav>
-<!-- header -->
+<!-- headerEnd -->
+
+
+
 
 {% block content %}
-
 {% endblock %}
 
 <!-- footer -->
@@ -141,7 +142,7 @@
     </div>
 </div>
 
-<!-- footer -->
+<!-- footerEnd -->
 
 
 <script src="../static/jquery.js"></script>
