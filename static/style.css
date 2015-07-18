@@ -290,3 +290,13 @@ div.selector option{ padding: 10px;}
 
 
 }
+
+.flash_messages .btn-default .btn-xs {
+	
+	margin:0px;
+	
+	background-color:#fff;
+	font-family:'Source Sans Pro', sans-serif; 
+	font-size:8px; 
+	text-align:center;
+}
