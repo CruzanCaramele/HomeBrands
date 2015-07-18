@@ -8,7 +8,7 @@ from flask.ext.bcrypt import check_password_hash
 from flask.ext.login import LoginManager,login_user, logout_user,login_required,current_user 
 
 DEBUG  = True
-PORT = 8080
+PORT = 8000
 HOST = '0.0.0.0'
 
 
@@ -65,7 +65,7 @@ def accountsuccess():
     if request.method == 'GET' :
         return render_template('accountsuccess.html',formLogin=formLogin)
     if request.method == 'POST' :
-        if request.form.get('login', None)  == 'Login' :
+        if request.form.get('login')  == 'Login' :
             return AccountController.authenticatePopUpLogin(formLogin,'index')
 
 
